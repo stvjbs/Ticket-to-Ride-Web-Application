@@ -1,3 +1,5 @@
 spring:
   application:
     name: Ticket-to-Ride-Web-Application
+  config:
+    import: "classpath:/stations/stations.yaml"
