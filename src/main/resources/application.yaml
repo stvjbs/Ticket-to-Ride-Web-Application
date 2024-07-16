@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: Ticket-to-Ride-Web-Application
