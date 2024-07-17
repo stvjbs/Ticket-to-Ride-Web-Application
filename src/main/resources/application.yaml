@@ -1,5 +1,10 @@
 spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/Ticket_to_ride_app
+    username: user
+    password: password
   application:
     name: Ticket-to-Ride-Web-Application
-  config:
-    import: "classpath:/stations/stations.yaml"
+    config:
+      sourcepathForStations: "classpath:stations.json"

@@ -6,8 +6,6 @@ import java.util.Map;
 
 @Data
 public class Station {
-
-    private final String city;
-    private final Map<Station, Integer> neighbourCities;
-
+    private String city;
+    private Map<String, Integer> neighbourCities;
 }
