@@ -1,53 +1,195 @@
 [
   {
     "city": "Bristol",
-    "neighbourCities": {
-      "Birmingham": 3,
-      "Swindon": 2
-    }
+    "neighbours": [
+      {
+        "start": {
+          "city": "Bristol"
+        },
+        "end": {
+          "city": "Birmingham"
+        },
+        "length": 3
+      },
+      {
+        "start": {
+          "city": "Bristol"
+        },
+        "end": {
+          "city": "Swindon"
+        },
+        "length": 2
+      }
+    ],
+    "visited": false,
+    "distance": 2147483647
   },
   {
     "city": "Swindon",
-    "neighbourCities": {
-      "Bristol": 2,
-      "Reading": 4,
-      "Birmingham": 4
-    }
+    "neighbours": [
+      {
+        "start": {
+          "city": "Swindon"
+        },
+        "end": {
+          "city": "Bristol"
+        },
+        "length": 2
+      },
+      {
+        "start": {
+          "city": "Swindon"
+        },
+        "end": {
+          "city": "Reading"
+        },
+        "length": 4
+      },
+      {
+        "start": {
+          "city": "Swindon"
+        },
+        "end": {
+          "city": "Birmingham"
+        },
+        "length": 4
+      }
+    ],
+    "visited": false,
+    "distance": 2147483647
   },
   {
     "city": "Reading",
-    "neighbourCities": {
-      "Swindon": 4,
-      "London": 1
-    }
+    "neighbours": [
+      {
+        "start": {
+          "city": "Reading"
+        },
+        "end": {
+          "city": "Swindon"
+        },
+        "length": 4
+      },
+      {
+        "start": {
+          "city": "Reading"
+        },
+        "end": {
+          "city": "London"
+        },
+        "length": 1
+      }
+    ],
+    "visited": false,
+    "distance": 2147483647
   },
   {
     "city": "London",
-    "neighbourCities": {
-      "Reading": 1,
-      "Northampton": 2
-    }
+    "neighbours": [
+      {
+        "start": {
+          "city": "London"
+        },
+        "end": {
+          "city": "Reading"
+        },
+        "length": 1
+      },
+      {
+        "start": {
+          "city": "London"
+        },
+        "end": {
+          "city": "Northhampton"
+        },
+        "length": 2
+      }
+    ],
+    "visited": false,
+    "distance": 2147483647
   },
   {
-    "city": "Northampton",
-    "neighbourCities": {
-      "London": 2,
-      "Coventry": 2
-    }
+    "city": "Northhampton",
+    "neighbours": [
+      {
+        "start": {
+          "city": "Northhampton"
+        },
+        "end": {
+          "city": "London"
+        },
+        "length": 2
+      },
+      {
+        "start": {
+          "city": "Northhampton"
+        },
+        "end": {
+          "city": "Coventry"
+        },
+        "length": 2
+      }
+    ],
+    "visited": false,
+    "distance": 2147483647
   },
   {
     "city": "Coventry",
-    "neighbourCities": {
-      "Northampton": 2,
-      "Birmingham": 1
-    }
+    "neighbours": [
+      {
+        "start": {
+          "city": "Coventry"
+        },
+        "end": {
+          "city": "Northhampton"
+        },
+        "length": 2
+      },
+      {
+        "start": {
+          "city": "Coventry"
+        },
+        "end": {
+          "city": "Birmingham"
+        },
+        "length": 1
+      }
+    ],
+    "visited": false,
+    "distance": 2147483647
   },
   {
     "city": "Birmingham",
-    "neighbourCities": {
-      "Coventry": 1,
-      "Bristol": 3,
-      "Swindon": 4
-    }
+    "neighbours": [
+      {
+        "start": {
+          "city": "Birmingham"
+        },
+        "end": {
+          "city": "Coventry"
+        },
+        "length": 1
+      },
+      {
+        "start": {
+          "city": "Birmingham"
+        },
+        "end": {
+          "city": "Bristol"
+        },
+        "length": 3
+      },
+      {
+        "start": {
+          "city": "Birmingham"
+        },
+        "end": {
+          "city": "Swindon"
+        },
+        "length": 4
+      }
+    ],
+    "visited": false,
+    "distance": 2147483647
   }
 ]

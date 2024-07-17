@@ -1,6 +1,7 @@
 package com.andersen.Ticket_to_Ride_Web_Application;
 
 
+import com.andersen.Ticket_to_Ride_Web_Application.dijkstraAlgorithm.DijkstraAlghorithm;
 import com.andersen.Ticket_to_Ride_Web_Application.entity.Station;
 import com.andersen.Ticket_to_Ride_Web_Application.service.StationService;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +16,8 @@ public class TicketToRideWebApplication {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = SpringApplication.run(TicketToRideWebApplication.class, args);
 		StationService service = applicationContext.getBean(StationService.class);
-		System.out.println(service.getStations());
+		DijkstraAlghorithm da = applicationContext.getBean(DijkstraAlghorithm.class);
+		System.out.println(da.shortestPath("Bristol","London"));
 	}
 
 }
