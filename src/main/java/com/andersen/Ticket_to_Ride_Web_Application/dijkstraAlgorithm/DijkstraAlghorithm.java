@@ -1,39 +1,36 @@
 package com.andersen.Ticket_to_Ride_Web_Application.dijkstraAlgorithm;
 
+import com.andersen.Ticket_to_Ride_Web_Application.dto.StationDto;
 import com.andersen.Ticket_to_Ride_Web_Application.entity.Route;
-import com.andersen.Ticket_to_Ride_Web_Application.entity.Station;
+import com.andersen.Ticket_to_Ride_Web_Application.exception.NoSuchStationException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.PriorityQueue;
 
 @Component
+@RequiredArgsConstructor
 public class DijkstraAlghorithm {
-    private final PriorityQueue<Station> pq;
-    private final List<Station> list;
-    public DijkstraAlghorithm(List<Station> list) {
-        this.list = list;
-        this.pq = new PriorityQueue<>();
-    }
 
-    public Integer shortestPath(String start, String end) {
-        Station startStation = list.stream().filter(x-> x.getCity().equals(start)).findFirst().get();
-        Station endStation = list.stream().filter(x-> x.getCity().equals(end)).findFirst().get();
+    public static Integer shortestPath(List<StationDto> stations,
+                                String start, String end) {
+        StationDto startStation = findStationByName(stations, start);
+        StationDto endStation = findStationByName(stations, end);
+        PriorityQueue<StationDto> unvisitedQueue = new PriorityQueue<>();
         startStation.setDistance(0);
-        pq.add(startStation);
-        while (!pq.isEmpty()) {
-            Station currStation = pq.poll();
+        unvisitedQueue.add(startStation);
+        while (!unvisitedQueue.isEmpty()) {
+            StationDto currStation = unvisitedQueue.poll();
             for (Route route : currStation.getNeighbours()) {
-                Station neighbour = findByCity(route.getEnd().getCity());
+                StationDto neighbour = findStationByName(stations, route.getEnd().getCity());
                 Integer routeLength = route.getLength();
 
                 if (!neighbour.isVisited()) {
                     if (currStation.getDistance() + routeLength < neighbour.getDistance()) {
                         neighbour.setDistance(currStation.getDistance() + routeLength);
-                        if (pq.contains(neighbour)) {
-                            pq.remove(neighbour);
-                        }
-                        pq.add(neighbour);
+                        unvisitedQueue.add(neighbour);
                     }
                 }
             }
@@ -42,7 +39,12 @@ public class DijkstraAlghorithm {
         return endStation.getDistance();
     }
 
-    public Station findByCity(String city) {
-        return list.stream().filter(x-> x.getCity().equals(city)).findFirst().get();
+    private static StationDto findStationByName(List<StationDto> stations, String city) {
+        Optional<StationDto> stationOptional = stations.stream()
+                .filter(x -> x.getStation().getCity().equals(city)).findFirst();
+        if (stationOptional.isPresent()) {
+            return stationOptional.get();
+        }
+        throw new NoSuchStationException("No station found with city: " + city);
     }
 }

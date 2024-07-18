@@ -1,29 +1,28 @@
 package com.andersen.Ticket_to_Ride_Web_Application.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
+@Entity
+@Table(name = "stations")
 @Getter
 @Setter
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Station implements Comparable<Station> {
-    private final String city;
-    private final List<Route> neighbours;
-    private boolean visited;
-    private Integer distance = Integer.MAX_VALUE;
-
-    public Station(@JsonProperty("city") String city,
-                   @JsonProperty("neighbours") List<Route> neighbours) {
-        this.city = city;
-        this.neighbours = neighbours;
-    }
-
-    @Override
-    public int compareTo(Station o) {
-        return this.distance.compareTo(o.distance);
-    }
+public class Station {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(unique = true, nullable = false)
+    private String city;
+    @OneToMany(mappedBy = "start", fetch = FetchType.EAGER)
+    private Set<Route> neighbours;
 }

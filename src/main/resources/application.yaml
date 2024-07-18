@@ -4,7 +4,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/Ticket_to_ride_app
     username: user
     password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   application:
     name: Ticket-to-Ride-Web-Application
-    config:
-      sourcepathForStations: "classpath:stations.json"

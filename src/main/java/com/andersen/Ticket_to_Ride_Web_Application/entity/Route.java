@@ -1,22 +1,30 @@
 package com.andersen.Ticket_to_Ride_Web_Application.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-
+@Entity
+@Table(name = "routes")
 @Getter
 @Setter
 public class Route {
-    private final Station start;
-    private final Station end;
-    private final Integer length;
-
-    public Route(@JsonProperty("start") Station start,
-                 @JsonProperty("end") Station end,
-                 @JsonProperty("length") Integer length) {
-        this.start = start;
-        this.end = end;
-        this.length = length;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne()
+    @JoinColumn(name = "start_city_id")
+    private Station start;
+    @ManyToOne()
+    @JoinColumn(name = "end_city_id")
+    private Station end;
+    @Column(nullable = false)
+    private Integer length;
 }
