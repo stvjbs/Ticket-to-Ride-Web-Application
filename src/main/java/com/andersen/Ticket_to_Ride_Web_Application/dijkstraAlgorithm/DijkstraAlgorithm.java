@@ -3,19 +3,15 @@ package com.andersen.Ticket_to_Ride_Web_Application.dijkstraAlgorithm;
 import com.andersen.Ticket_to_Ride_Web_Application.dto.StationDto;
 import com.andersen.Ticket_to_Ride_Web_Application.entity.Route;
 import com.andersen.Ticket_to_Ride_Web_Application.exception.NoSuchStationException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.PriorityQueue;
 
-@Component
-@RequiredArgsConstructor
-public class DijkstraAlghorithm {
+public class DijkstraAlgorithm {
 
     public static Integer shortestPath(List<StationDto> stations,
-                                String start, String end) {
+                                       String start, String end) {
         StationDto startStation = findStationByName(stations, start);
         StationDto endStation = findStationByName(stations, end);
         PriorityQueue<StationDto> unvisitedQueue = new PriorityQueue<>();
