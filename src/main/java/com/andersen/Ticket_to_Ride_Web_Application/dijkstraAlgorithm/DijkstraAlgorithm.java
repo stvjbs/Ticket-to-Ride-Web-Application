@@ -26,6 +26,9 @@ public class DijkstraAlgorithm {
                 if (!neighbour.isVisited()) {
                     if (currStation.getDistance() + routeLength < neighbour.getDistance()) {
                         neighbour.setDistance(currStation.getDistance() + routeLength);
+                        if(unvisitedQueue.contains(neighbour)) {
+                            unvisitedQueue.remove(neighbour);
+                        }
                         unvisitedQueue.add(neighbour);
                     }
                 }
