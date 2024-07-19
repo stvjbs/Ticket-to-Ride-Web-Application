@@ -1,45 +1,33 @@
-CREATE TABLE stations (
+CREATE TABLE IF NOT EXISTS stations (
                          id SERIAL PRIMARY KEY,
                          city VARCHAR(255) UNIQUE NOT NULL
 );
+CREATE TABLE IF NOT EXISTS routes (
+id SERIAL PRIMARY KEY,
+start_city_id INT NOT NULL,
+end_city_id INT NOT NULL,
+length INT NOT NULL,
+CONSTRAINT fk_start_city FOREIGN KEY(start_city_id) REFERENCES stations(id),
+CONSTRAINT fk_end_city FOREIGN KEY(end_city_id) REFERENCES stations(id));
 
--- Создание таблицы Route
-CREATE TABLE routes (
-                       id SERIAL PRIMARY KEY,
-                       start_city_id INT NOT NULL,
-                       end_city_id INT NOT NULL,
-                       length INT NOT NULL,
-                       CONSTRAINT fk_start_city
-                           FOREIGN KEY(start_city_id)
-                               REFERENCES stations(id),
-                       CONSTRAINT fk_end_city
-                           FOREIGN KEY(end_city_id)
-                               REFERENCES stations(id)
+CREATE TABLE IF NOT EXISTS travellers (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    login VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL
 );
-INSERT INTO stations (city) VALUES
-                               ('Bristol'),
-                               ('Swindon'),
-                               ('Reading'),
-                               ('London'),
-                               ('Northampton'),
-                               ('Coventry'),
-                               ('Birmingham');
+DROP TABLE tickets;
+CREATE TABLE IF NOT EXISTS tickets (
+    id SERIAL PRIMARY KEY,
+    traveller_id BIGINT NOT NULL,
+    departure_id BIGINT NOT NULL,
+    arrival_id BIGINT NOT NULL,
+    segments INTEGER,
+    result VARCHAR(255),
+    CONSTRAINT fk_traveller FOREIGN KEY (traveller_id) REFERENCES travellers(id),
+    CONSTRAINT fk_departure FOREIGN KEY (departure_id) REFERENCES stations(id),
+    CONSTRAINT fk_arrival FOREIGN KEY (arrival_id) REFERENCES stations(id)
+);
 
--- Вставка данных в таблицу Route с использованием подзапросов для получения id
-INSERT INTO routes (start_city_id, end_city_id, length) VALUES
-                                                           ((SELECT id FROM stations WHERE city = 'Bristol'), (SELECT id FROM stations WHERE city = 'Birmingham'), 3),
-                                                           ((SELECT id FROM stations WHERE city = 'Bristol'), (SELECT id FROM stations WHERE city = 'Swindon'), 2),
-                                                           ((SELECT id FROM stations WHERE city = 'Swindon'), (SELECT id FROM stations WHERE city = 'Bristol'), 2),
-                                                           ((SELECT id FROM stations WHERE city = 'Swindon'), (SELECT id FROM stations WHERE city = 'Reading'), 4),
-                                                           ((SELECT id FROM stations WHERE city = 'Swindon'), (SELECT id FROM stations WHERE city = 'Birmingham'), 4),
-                                                           ((SELECT id FROM stations WHERE city = 'Reading'), (SELECT id FROM stations WHERE city = 'Swindon'), 4),
-                                                           ((SELECT id FROM stations WHERE city = 'Reading'), (SELECT id FROM stations WHERE city = 'London'), 1),
-                                                           ((SELECT id FROM stations WHERE city = 'London'), (SELECT id FROM stations WHERE city = 'Reading'), 1),
-                                                           ((SELECT id FROM stations WHERE city = 'London'), (SELECT id FROM stations WHERE city = 'Northampton'), 2),
-                                                           ((SELECT id FROM stations WHERE city = 'Northampton'), (SELECT id FROM stations WHERE city = 'London'), 2),
-                                                           ((SELECT id FROM stations WHERE city = 'Northampton'), (SELECT id FROM stations WHERE city = 'Coventry'), 2),
-                                                           ((SELECT id FROM stations WHERE city = 'Coventry'), (SELECT id FROM stations WHERE city = 'Northampton'), 2),
-                                                           ((SELECT id FROM stations WHERE city = 'Coventry'), (SELECT id FROM stations WHERE city = 'Birmingham'), 1),
-                                                           ((SELECT id FROM stations WHERE city = 'Birmingham'), (SELECT id FROM stations WHERE city = 'Coventry'), 1),
-                                                           ((SELECT id FROM stations WHERE city = 'Birmingham'), (SELECT id FROM stations WHERE city = 'Bristol'), 3),
-                                                           ((SELECT id FROM stations WHERE city = 'Birmingham'), (SELECT id FROM stations WHERE city = 'Swindon'), 4);
