@@ -39,7 +39,4 @@ public class Ticket {
     @Column(name = "currency")
     @Enumerated(EnumType.STRING)
     private Currency currency;
-    @Column(name = "result")
-    @Enumerated(EnumType.STRING)
-    private ResultTicket resultTicket;
 }

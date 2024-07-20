@@ -2,9 +2,9 @@ package com.andersen.Ticket_to_Ride_Web_Application.exception;
 
 import java.util.NoSuchElementException;
 
-public class NoSuchStationException extends NoSuchElementException {
+public class NoSuchEntityException extends NoSuchElementException {
 
-    public NoSuchStationException(String s) {
+    public NoSuchEntityException(String s) {
         super(s);
     }
 }

@@ -14,6 +14,7 @@ public class SecurityConfiguration {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(registry -> registry
+                        .requestMatchers("ticket/count").hasAnyAuthority("user", "admin")
                         .anyRequest().permitAll()
                 )
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer

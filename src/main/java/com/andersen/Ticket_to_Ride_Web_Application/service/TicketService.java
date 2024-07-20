@@ -15,7 +15,7 @@ public class TicketService {
     private final StationRouteService stationRouteService;
 
     public TicketGetDto findTicket(TicketFindRequest ticketFindRequest) {
-        Currency currency = (ticketFindRequest.getCurrency() != null) ? ticketFindRequest.getCurrency() : Currency.GBP;
+        Currency currency = ticketFindRequest.getCurrency();
         Integer segments = stationRouteService
                 .findShortestPath(ticketFindRequest.getDeparture(),
                 ticketFindRequest.getArrival());

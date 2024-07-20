@@ -2,7 +2,7 @@ package com.andersen.Ticket_to_Ride_Web_Application.dijkstraAlgorithm;
 
 import com.andersen.Ticket_to_Ride_Web_Application.dto.StationDto;
 import com.andersen.Ticket_to_Ride_Web_Application.entity.Route;
-import com.andersen.Ticket_to_Ride_Web_Application.exception.NoSuchStationException;
+import com.andersen.Ticket_to_Ride_Web_Application.exception.NoSuchEntityException;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +44,6 @@ public class DijkstraAlgorithm {
         if (stationOptional.isPresent()) {
             return stationOptional.get();
         }
-        throw new NoSuchStationException("No station found with city: " + city);
+        throw new NoSuchEntityException("No station found with city: " + city);
     }
 }

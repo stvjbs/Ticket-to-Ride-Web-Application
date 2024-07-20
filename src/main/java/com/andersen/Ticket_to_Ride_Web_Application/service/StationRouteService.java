@@ -2,7 +2,7 @@ package com.andersen.Ticket_to_Ride_Web_Application.service;
 
 import com.andersen.Ticket_to_Ride_Web_Application.dijkstraAlgorithm.DijkstraAlgorithm;
 import com.andersen.Ticket_to_Ride_Web_Application.dto.StationDto;
-import com.andersen.Ticket_to_Ride_Web_Application.mapper.StationDtoMapper;
+import com.andersen.Ticket_to_Ride_Web_Application.util.mapper.StationDtoMapper;
 import com.andersen.Ticket_to_Ride_Web_Application.repository.StationRouteRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

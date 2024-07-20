@@ -23,3 +23,6 @@ INSERT INTO routes (start_city_id, end_city_id, length) VALUES
     ((SELECT id FROM stations WHERE city = 'Birmingham'), (SELECT id FROM stations WHERE city = 'Coventry'), 1),
     ((SELECT id FROM stations WHERE city = 'Birmingham'), (SELECT id FROM stations WHERE city = 'Bristol'), 3),
     ((SELECT id FROM stations WHERE city = 'Birmingham'), (SELECT id FROM stations WHERE city = 'Swindon'), 4);
+INSERT INTO travellers (first_name, last_name, login, password, role) VALUES (
+                                                                              'John','Doe','johndoe1','doejohn','user'
+                                                                             )
