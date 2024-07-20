@@ -1,4 +1,4 @@
-package com.andersen.Ticket_to_Ride_Web_Application.dto;
+package com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.request;
 
 import com.andersen.Ticket_to_Ride_Web_Application.entity.enums.Currency;
 import com.andersen.Ticket_to_Ride_Web_Application.exception.ValidationException;
@@ -13,7 +13,6 @@ public class TicketFindRequest {
     public TicketFindRequest(String departure, String arrival, String currency) {
         this.departure = departure;
         this.arrival = arrival;
-
         this.currency = validateAndMapCurrency(currency);
     }
 
