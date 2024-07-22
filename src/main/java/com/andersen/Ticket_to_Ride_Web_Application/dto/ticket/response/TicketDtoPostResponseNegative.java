@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class TicketDtoResponseNegative extends TicketDtoResponse {
+public class TicketDtoPostResponseNegative extends TicketDtoPostResponse {
     private ResultTicket resultTicket;
     private BigDecimal lackOf;
 
-    public TicketDtoResponseNegative(BigDecimal lackOf, Currency currency) {
+    public TicketDtoPostResponseNegative(BigDecimal lackOf, Currency currency) {
         this.lackOf = lackOf;
         super.setCurrency(currency);
         this.resultTicket = ResultTicket.FAILURE;

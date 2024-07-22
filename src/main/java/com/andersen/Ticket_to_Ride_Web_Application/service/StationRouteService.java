@@ -26,7 +26,8 @@ public class StationRouteService {
     }
 
     public Station findStationByName(String stationName) {
-        return stationRouteRepository.findStationByCity(stationName).orElseThrow(NoSuchEntityException::new);
+        return stationRouteRepository.findStationByCity(stationName)
+                .orElseThrow(() -> new NoSuchEntityException("No station found with city: " + stationName));
     }
 
 

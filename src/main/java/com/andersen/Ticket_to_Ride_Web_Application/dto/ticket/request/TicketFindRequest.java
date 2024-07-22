@@ -21,7 +21,7 @@ public class TicketFindRequest {
     private Currency validateAndMapCurrency(String currency) {
         if (currency == null) return Currency.GBP;
         try {
-            return Currency.valueOf(currency);
+            return Currency.valueOf(currency.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ValidationException("Invalid currency");
         }

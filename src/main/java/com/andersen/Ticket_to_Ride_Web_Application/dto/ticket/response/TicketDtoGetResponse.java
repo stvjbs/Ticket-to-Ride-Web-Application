@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TicketGetDtoResponse {
+public class TicketDtoGetResponse {
     private Integer segments;
     private BigDecimal price;
     private Currency currency;

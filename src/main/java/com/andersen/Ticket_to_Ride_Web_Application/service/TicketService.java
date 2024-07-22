@@ -2,11 +2,12 @@ package com.andersen.Ticket_to_Ride_Web_Application.service;
 
 import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.request.TicketDtoRequest;
 import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.request.TicketFindRequest;
-import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoResponse;
-import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoResponseNegative;
-import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoResponsePositive;
-import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketGetDtoResponse;
+import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoPostResponse;
+import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoPostResponseNegative;
+import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoPostResponsePositive;
+import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoGetResponse;
 import com.andersen.Ticket_to_Ride_Web_Application.entity.Ticket;
+import com.andersen.Ticket_to_Ride_Web_Application.exception.ValidationException;
 import com.andersen.Ticket_to_Ride_Web_Application.repository.TicketRepository;
 import com.andersen.Ticket_to_Ride_Web_Application.util.PriceCounter;
 import lombok.RequiredArgsConstructor;
@@ -20,26 +21,25 @@ public class TicketService {
     private final StationRouteService stationRouteService;
     private final TicketRepository ticketRepository;
 
-    public TicketGetDtoResponse findTicket(String departure, String arrival, String currency) {
+    public TicketDtoGetResponse findTicket(String departure, String arrival, String currency) {
         TicketFindRequest ticketFindRequest = new TicketFindRequest(departure, arrival, currency);
         Integer segments = stationRouteService
                 .findShortestPath(ticketFindRequest.getDeparture(),
                         ticketFindRequest.getArrival());
         BigDecimal price = PriceCounter.countPrice(segments);
-        return new TicketGetDtoResponse(segments, price, ticketFindRequest.getCurrency());
+        return new TicketDtoGetResponse(segments, price, ticketFindRequest.getCurrency());
     }
 
-    public TicketDtoResponse saveTicket(TicketDtoRequest request) {
+    public TicketDtoPostResponse saveTicket(TicketDtoRequest request) {
         BigDecimal travellerAmount = request.getTravellerAmount();
         BigDecimal price = request.getPrice();
         if (travellerAmount.compareTo(price) < 0) {
-            return new TicketDtoResponseNegative(price.subtract(travellerAmount), request.getCurrency());
+            return new TicketDtoPostResponseNegative(price.subtract(travellerAmount), request.getCurrency());
         }
-        TicketDtoResponsePositive ticketDtoResponsePositive =
-                new TicketDtoResponsePositive(travellerAmount.subtract(price), request.getCurrency());
         Ticket ticket = requestToTicket(request);
+        validateTicketNotNull(ticket);
         ticketRepository.save(ticket);
-        return ticketDtoResponsePositive;
+        return new TicketDtoPostResponsePositive(travellerAmount.subtract(price), request.getCurrency());
     }
 
     private Ticket requestToTicket(TicketDtoRequest request) {
@@ -51,6 +51,15 @@ public class TicketService {
                 .currency(request.getCurrency())
                 .traveller(request.getTraveller())
                 .build();
+    }
+
+    private void validateTicketNotNull(Ticket ticket) {
+        boolean hasNull = ticket.getArrival() == null || ticket.getDeparture() == null ||
+                ticket.getSegments() == null || ticket.getPrice() == null ||
+                ticket.getCurrency() == null || ticket.getTraveller() == null;
+        if (hasNull) {
+            throw new ValidationException("One or more fields are null!");
+        }
     }
 }
 

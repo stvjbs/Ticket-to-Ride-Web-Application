@@ -1,8 +1,8 @@
 package com.andersen.Ticket_to_Ride_Web_Application.controller;
 
 import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.request.TicketDtoRequest;
-import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoResponse;
-import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketGetDtoResponse;
+import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoPostResponse;
+import com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response.TicketDtoGetResponse;
 import com.andersen.Ticket_to_Ride_Web_Application.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,15 +22,14 @@ public class TicketController {
     private final TicketService ticketService;
 
     @GetMapping("count")
-    public ResponseEntity<TicketGetDtoResponse> findTicket(@RequestParam String departure,
+    public ResponseEntity<TicketDtoGetResponse> findTicket(@RequestParam String departure,
                                                            @RequestParam String arrival,
                                                            @RequestParam(required = false) String currency) {
         return ResponseEntity.status(HttpStatus.FOUND).body(ticketService.findTicket(departure, arrival, currency));
     }
 
     @PostMapping("order")
-    public ResponseEntity<TicketDtoResponse> saveTicket(@RequestBody TicketDtoRequest request) {
+    public ResponseEntity<TicketDtoPostResponse> saveTicket(@RequestBody TicketDtoRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(ticketService.saveTicket(request));
     }
-
 }

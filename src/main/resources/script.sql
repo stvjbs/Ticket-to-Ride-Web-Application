@@ -21,12 +21,10 @@ CREATE TABLE IF NOT EXISTS travellers (
 DROP TABLE tickets;
 CREATE TABLE IF NOT EXISTS tickets (
     id SERIAL PRIMARY KEY,
-    traveller_id BIGINT NOT NULL,
+    traveller VARCHAR(255) NOT NULL,
     departure_id BIGINT NOT NULL,
     arrival_id BIGINT NOT NULL,
-    segments INTEGER,
-    result VARCHAR(255),
-    CONSTRAINT fk_traveller FOREIGN KEY (traveller_id) REFERENCES travellers(id),
+    segments INTEGER NOT NULL,
     CONSTRAINT fk_departure FOREIGN KEY (departure_id) REFERENCES stations(id),
     CONSTRAINT fk_arrival FOREIGN KEY (arrival_id) REFERENCES stations(id)
 );

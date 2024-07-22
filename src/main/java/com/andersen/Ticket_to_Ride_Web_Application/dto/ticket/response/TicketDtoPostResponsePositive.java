@@ -8,11 +8,11 @@ import lombok.Setter;
 import java.math.BigDecimal;
 @Getter
 @Setter
-public class TicketDtoResponsePositive extends TicketDtoResponse{
+public class TicketDtoPostResponsePositive extends TicketDtoPostResponse {
     private ResultTicket resultTicket;
     private BigDecimal change;
 
-    public TicketDtoResponsePositive(BigDecimal change, Currency currency) {
+    public TicketDtoPostResponsePositive(BigDecimal change, Currency currency) {
         this.change = change;
         super.setCurrency(currency);
         this.resultTicket = ResultTicket.SUCCESS;

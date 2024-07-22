@@ -13,7 +13,7 @@ public class SecurityConfiguration {
         return httpSecurity
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers("ticket/count").permitAll()
-                        .requestMatchers("ticket/order").permitAll()
+                        .requestMatchers("ticket/order").hasAnyAuthority("user", "admin")
                 )
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer
                         .ignoringRequestMatchers("/ticket/**"))

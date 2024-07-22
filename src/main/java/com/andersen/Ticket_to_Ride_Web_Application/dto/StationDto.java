@@ -3,6 +3,7 @@ package com.andersen.Ticket_to_Ride_Web_Application.dto;
 import com.andersen.Ticket_to_Ride_Web_Application.entity.Route;
 import com.andersen.Ticket_to_Ride_Web_Application.entity.Station;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.util.Set;
@@ -24,7 +25,7 @@ public class StationDto implements Comparable<StationDto> {
     }
 
     @Override
-    public int compareTo(StationDto o) {
+    public int compareTo(@NonNull StationDto o) {
         return Integer.compare(this.distance, o.distance);
     }
 }

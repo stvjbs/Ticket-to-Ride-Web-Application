@@ -28,19 +28,19 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @JoinColumn(name = "departure_id")
+    @JoinColumn(name = "departure_id", nullable = false)
     @ManyToOne
     private Station departure;
-    @JoinColumn(name = "arrival_id")
+    @JoinColumn(name = "arrival_id", nullable = false)
     @ManyToOne
     private Station arrival;
-    @Column(name = "segments")
+    @Column(name = "segments", nullable = false)
     private Integer segments;
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
-    @Column(name = "currency")
+    @Column(name = "currency", nullable = false)
     @Enumerated(EnumType.STRING)
     private Currency currency;
-    @Column(name = "traveller")
+    @Column(name = "traveller", nullable = false)
     private String traveller;
 }
