@@ -1,4 +1,4 @@
-package com.andersen.Ticket_to_Ride_Web_Application.dto;
+package com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response;
 
 import com.andersen.Ticket_to_Ride_Web_Application.entity.enums.Currency;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TicketGetDto {
+public class TicketGetDtoResponse {
     private Integer segments;
     private BigDecimal price;
     private Currency currency;

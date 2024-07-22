@@ -19,11 +19,11 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne()
     @JoinColumn(name = "start_city_id")
-    private Station start;
     @ManyToOne()
+    private Station start;
     @JoinColumn(name = "end_city_id")
+    @ManyToOne()
     private Station end;
     @Column(nullable = false)
     private Integer length;
