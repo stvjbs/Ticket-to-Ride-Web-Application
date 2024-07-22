@@ -21,7 +21,7 @@ public class Station {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(unique = true, nullable = false)
+    @Column(name = "city", unique = true, nullable = false)
     private String city;
     @OneToMany(mappedBy = "start", fetch = FetchType.EAGER)
     private Set<Route> neighbours;

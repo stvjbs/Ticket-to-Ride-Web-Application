@@ -25,11 +25,11 @@ public class TicketController {
     public ResponseEntity<TicketGetDtoResponse> findTicket(@RequestParam String departure,
                                                            @RequestParam String arrival,
                                                            @RequestParam(required = false) String currency) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(ticketService.findTicket(departure,arrival,currency));
+        return ResponseEntity.status(HttpStatus.FOUND).body(ticketService.findTicket(departure, arrival, currency));
     }
 
     @PostMapping("order")
-    public ResponseEntity<TicketDtoResponse> saveTicket(@RequestBody TicketDtoRequest request){
+    public ResponseEntity<TicketDtoResponse> saveTicket(@RequestBody TicketDtoRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(ticketService.saveTicket(request));
     }
 

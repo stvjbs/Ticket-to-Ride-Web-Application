@@ -2,9 +2,11 @@ package com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.request;
 
 import com.andersen.Ticket_to_Ride_Web_Application.entity.enums.Currency;
 import com.andersen.Ticket_to_Ride_Web_Application.exception.ValidationException;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class TicketFindRequest {
     private String departure;
     private String arrival;

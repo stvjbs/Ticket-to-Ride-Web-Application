@@ -1,5 +1,6 @@
 package com.andersen.Ticket_to_Ride_Web_Application.dto.ticket.response;
 
+import com.andersen.Ticket_to_Ride_Web_Application.entity.enums.Currency;
 import com.andersen.Ticket_to_Ride_Web_Application.entity.enums.ResultTicket;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +12,9 @@ public class TicketDtoResponsePositive extends TicketDtoResponse{
     private ResultTicket resultTicket;
     private BigDecimal change;
 
-    public TicketDtoResponsePositive(BigDecimal change) {
+    public TicketDtoResponsePositive(BigDecimal change, Currency currency) {
         this.change = change;
-        this.resultTicket = ResultTicket.success;
+        super.setCurrency(currency);
+        this.resultTicket = ResultTicket.SUCCESS;
     }
 }

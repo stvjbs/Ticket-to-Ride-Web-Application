@@ -2,16 +2,16 @@ package com.andersen.Ticket_to_Ride_Web_Application.service;
 
 import com.andersen.Ticket_to_Ride_Web_Application.dijkstraAlgorithm.DijkstraAlgorithm;
 import com.andersen.Ticket_to_Ride_Web_Application.dto.StationDto;
-import com.andersen.Ticket_to_Ride_Web_Application.util.mapper.StationDtoMapper;
+import com.andersen.Ticket_to_Ride_Web_Application.entity.Station;
+import com.andersen.Ticket_to_Ride_Web_Application.exception.NoSuchEntityException;
 import com.andersen.Ticket_to_Ride_Web_Application.repository.StationRouteRepository;
-import lombok.Getter;
+import com.andersen.Ticket_to_Ride_Web_Application.util.mapper.StationDtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Getter
 @RequiredArgsConstructor
 public class StationRouteService {
 
@@ -23,6 +23,10 @@ public class StationRouteService {
 
     public Integer findShortestPath(String startStation, String endStation) {
         return DijkstraAlgorithm.shortestPath(findAllStations(), startStation, endStation);
+    }
+
+    public Station findStationByName(String stationName) {
+        return stationRouteRepository.findStationByCity(stationName).orElseThrow(NoSuchEntityException::new);
     }
 
 
