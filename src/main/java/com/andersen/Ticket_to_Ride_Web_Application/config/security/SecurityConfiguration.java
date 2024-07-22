@@ -1,4 +1,4 @@
-package com.andersen.Ticket_to_Ride_Web_Application.config;
+package com.andersen.Ticket_to_Ride_Web_Application.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ public class SecurityConfiguration {
         return httpSecurity
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers("ticket/count").permitAll()
-                        .requestMatchers("ticket/order").hasAnyAuthority("user", "admin")
+                        .requestMatchers("ticket/order").permitAll()
                 )
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer
                         .ignoringRequestMatchers("/ticket/**"))

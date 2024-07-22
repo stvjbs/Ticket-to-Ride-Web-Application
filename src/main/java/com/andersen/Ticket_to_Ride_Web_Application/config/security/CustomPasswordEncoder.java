@@ -1,4 +1,4 @@
-package com.andersen.Ticket_to_Ride_Web_Application.config;
+package com.andersen.Ticket_to_Ride_Web_Application.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;

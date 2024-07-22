@@ -1,4 +1,4 @@
-package com.andersen.Ticket_to_Ride_Web_Application.config;
+package com.andersen.Ticket_to_Ride_Web_Application.config.security;
 
 import com.andersen.Ticket_to_Ride_Web_Application.entity.Traveller;
 import com.andersen.Ticket_to_Ride_Web_Application.exception.NoSuchEntityException;
