@@ -1,4 +1,4 @@
-package com.andersen.ticket_to_ride.util;
+package com.andersen.ticket_to_ride.strategy.pathfinder;
 
 import com.andersen.ticket_to_ride.dto.StationDto;
 import com.andersen.ticket_to_ride.entity.Route;
@@ -13,15 +13,11 @@ import java.util.PriorityQueue;
  * <p>
  * This class provides methods to find the shortest path between two stations
  * in a graph represented by a list of StationDto objects.
- * The main method, {@link #shortestPath(List, String, String)}, implements Dijkstra's algorithm
+ * The main method, {@link #findPath(List, String, String)}, implements Dijkstra's algorithm
  * to find the shortest path.
  * </p>
  */
-public final class DijkstraAlgorithm {
-
-    private DijkstraAlgorithm() {
-        throw new IllegalStateException("Utility class");
-    }
+public final class DijkstraAlgorithm implements PathfindingStrategy{
 
     /**
      * Calculates the shortest path between two stations using Dijkstra's algorithm.
@@ -40,8 +36,9 @@ public final class DijkstraAlgorithm {
      * @return the shortest path distance from the start station to the end station
      * @throws NoSuchEntityException if either the start or end station is not found in the list
      */
-    public static Integer shortestPath(List<StationDto> stations,
-                                       String start, String end) {
+    @Override
+    public Integer findPath(List<StationDto> stations,
+                                   String start, String end) {
         StationDto startStation = findStationByName(stations, start);
         StationDto endStation = findStationByName(stations, end);
         PriorityQueue<StationDto> unvisitedQueue = new PriorityQueue<>();
@@ -74,7 +71,7 @@ public final class DijkstraAlgorithm {
      * @return the StationDto object representing the station
      * @throws com.andersen.ticket_to_ride.exception.NoSuchEntityException if no station is found with the given city name
      */
-    private static StationDto findStationByName(List<StationDto> stations, String city) {
+    private StationDto findStationByName(List<StationDto> stations, String city) {
         Optional<StationDto> stationOptional = stations.stream()
                 .filter(x -> x.getStation().getCity().equals(city)).findFirst();
         if (stationOptional.isPresent()) {

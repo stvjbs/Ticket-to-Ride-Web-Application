@@ -1,4 +1,4 @@
-package com.andersen.ticket_to_ride.util;
+package com.andersen.ticket_to_ride.strategy.priceCounter;
 
 import java.math.BigDecimal;
 
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * The pricing structure is based on different rates for groups of segments.
  * </p>
  */
-public final class PriceCounter {
+public final class PriceCounter implements PriceCountStrategy {
 
     /**
      * The number of segments for the biggest discount price.
@@ -36,17 +36,14 @@ public final class PriceCounter {
      */
     private static final double PRICE_FOR_EVERY_SINGLE_SEGMENT = 5.0;
 
-    private PriceCounter() {
-        throw new IllegalStateException("Utility class");
-    }
-
     /**
      * Calculates the price based on the number of segments.
      *
      * @param segments the number of segments
      * @return the calculated price
      */
-    public static BigDecimal countPrice(Integer segments) {
+    @Override
+    public BigDecimal countPrice(Integer segments) {
         int fullCountGroupsOfThree = segments / A;
         int remainingSegmentsAfterThree = segments % A;
         int fullCountGroupsOfTwo = remainingSegmentsAfterThree / B;

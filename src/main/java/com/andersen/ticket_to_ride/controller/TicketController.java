@@ -1,6 +1,6 @@
 package com.andersen.ticket_to_ride.controller;
 
-import com.andersen.ticket_to_ride.dto.ticket.request.TicketDtoRequest;
+import com.andersen.ticket_to_ride.dto.ticket.request.TicketSaveRequest;
 import com.andersen.ticket_to_ride.dto.ticket.response.TicketDtoGetResponse;
 import com.andersen.ticket_to_ride.dto.ticket.response.TicketDtoPostResponse;
 import com.andersen.ticket_to_ride.service.TicketService;
@@ -21,7 +21,7 @@ public class TicketController {
 
     private final TicketService ticketService;
 
-    @GetMapping("count")
+    @GetMapping("findPath")
     public ResponseEntity<TicketDtoGetResponse> findTicket(@RequestParam String departure,
                                                            @RequestParam String arrival,
                                                            @RequestParam(required = false) String currency) {
@@ -29,7 +29,7 @@ public class TicketController {
     }
 
     @PostMapping("order")
-    public ResponseEntity<TicketDtoPostResponse> saveTicket(@RequestBody TicketDtoRequest request) {
+    public ResponseEntity<TicketDtoPostResponse> saveTicket(@RequestBody TicketSaveRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(ticketService.saveTicket(request));
     }
 }

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * DTO class for creating a new ticket POST request.
  */
 @Data
-public class TicketDtoRequest {
+public class TicketSaveRequest {
     private String departure;
     private String arrival;
     private Integer segments;
