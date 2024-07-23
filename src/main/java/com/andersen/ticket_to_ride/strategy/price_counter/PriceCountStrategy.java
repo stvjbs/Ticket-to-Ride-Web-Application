@@ -1,4 +1,4 @@
-package com.andersen.ticket_to_ride.strategy.priceCounter;
+package com.andersen.ticket_to_ride.strategy.price_counter;
 
 import java.math.BigDecimal;
 

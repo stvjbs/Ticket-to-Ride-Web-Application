@@ -12,17 +12,17 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-public class TicketDtoPostResponseNegative extends TicketDtoPostResponse {
+public class TicketPostResponseNegative extends TicketPostResponse {
     private ResultTicket resultTicket;
     private BigDecimal lackOf;
 
     /**
-     * Constructs a TicketDtoPostResponseNegative with the specified parameters.
+     * Constructs a TicketPostResponseNegative with the specified parameters.
      *
      * @param lackOf   the amount of money lacking
      * @param currency the currency of the transaction
      */
-    public TicketDtoPostResponseNegative(BigDecimal lackOf, Currency currency) {
+    public TicketPostResponseNegative(BigDecimal lackOf, Currency currency) {
         this.lackOf = lackOf;
         super.setCurrency(currency);
         this.resultTicket = ResultTicket.FAILURE;

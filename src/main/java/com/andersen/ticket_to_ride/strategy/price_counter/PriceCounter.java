@@ -1,4 +1,4 @@
-package com.andersen.ticket_to_ride.strategy.priceCounter;
+package com.andersen.ticket_to_ride.strategy.price_counter;
 
 import java.math.BigDecimal;
 
@@ -44,16 +44,13 @@ public final class PriceCounter implements PriceCountStrategy {
      */
     @Override
     public BigDecimal countPrice(Integer segments) {
-        int fullCountGroupsOfThree = segments / A;
-        int remainingSegmentsAfterThree = segments % A;
-        int fullCountGroupsOfTwo = remainingSegmentsAfterThree / B;
-        int remainingSegmentsAfterTwo = remainingSegmentsAfterThree % B;
-        BigDecimal price = BigDecimal.valueOf(fullCountGroupsOfThree * PRICE_FOR_EVERY_A_SEGMENTS);
-        price = price.add(BigDecimal.valueOf(fullCountGroupsOfTwo * PRICE_FOR_EVERY_B_SEGMENTS));
-        if (remainingSegmentsAfterTwo == 1) {
-            price = price.add(BigDecimal.valueOf(PRICE_FOR_EVERY_SINGLE_SEGMENT));
-        }
-        return price;
+        int countGroupsOfA = segments / A;
+        int remainingSegmentsAfterA = segments % A;
+        int countGroupsOfB = remainingSegmentsAfterA / B;
+        int remainingSegmentsAfterB = remainingSegmentsAfterA % B;
+        return BigDecimal.valueOf(countGroupsOfA * PRICE_FOR_EVERY_A_SEGMENTS)
+                .add(BigDecimal.valueOf(countGroupsOfB * PRICE_FOR_EVERY_B_SEGMENTS))
+                .add(BigDecimal.valueOf(remainingSegmentsAfterB * PRICE_FOR_EVERY_SINGLE_SEGMENT));
     }
 }
 

@@ -12,17 +12,17 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-public class TicketDtoPostResponsePositive extends TicketDtoPostResponse {
+public class TicketPostResponsePositive extends TicketPostResponse {
     private ResultTicket resultTicket;
     private BigDecimal change;
 
     /**
-     * Constructs a TicketDtoPostResponsePositive with the specified parameters.
+     * Constructs a TicketPostResponsePositive with the specified parameters.
      *
      * @param change   the amount of change
      * @param currency the currency of the transaction
      */
-    public TicketDtoPostResponsePositive(BigDecimal change, Currency currency) {
+    public TicketPostResponsePositive(BigDecimal change, Currency currency) {
         this.change = change;
         super.setCurrency(currency);
         this.resultTicket = ResultTicket.SUCCESS;

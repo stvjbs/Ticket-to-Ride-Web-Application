@@ -10,19 +10,19 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class TicketFindRequest {
+public class TicketGetRequest {
     private String departure;
     private String arrival;
     private Currency currency;
 
     /**
-     * Constructs a TicketFindRequest with the specified parameters.
+     * Constructs a TicketGetRequest with the specified parameters.
      *
      * @param departure the departure station
      * @param arrival   the arrival station
      * @param currency  the currency as a string
      */
-    public TicketFindRequest(String departure, String arrival, String currency) {
+    public TicketGetRequest(String departure, String arrival, String currency) {
         this.departure = departure;
         this.arrival = arrival;
         this.currency = validateAndMapCurrency(currency);
