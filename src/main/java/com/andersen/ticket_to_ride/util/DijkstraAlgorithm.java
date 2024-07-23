@@ -8,12 +8,38 @@ import java.util.List;
 import java.util.Optional;
 import java.util.PriorityQueue;
 
-public class DijkstraAlgorithm {
+/**
+ * Utility class for calculating the shortest path using Dijkstra's algorithm.
+ * <p>
+ * This class provides methods to find the shortest path between two stations
+ * in a graph represented by a list of StationDto objects.
+ * The main method, {@link #shortestPath(List, String, String)}, implements Dijkstra's algorithm
+ * to find the shortest path.
+ * </p>
+ */
+public final class DijkstraAlgorithm {
 
     private DijkstraAlgorithm() {
         throw new IllegalStateException("Utility class");
     }
 
+    /**
+     * Calculates the shortest path between two stations using Dijkstra's algorithm.
+     * <p>
+     * This method finds the shortest path between the start station and the end station
+     * in the given list of stations.
+     * Each station has a list of neighboring stations with associated route lengths.
+     * The method initializes the distance of the start station to zero(as if we are at this station) and uses
+     * a priority queue to process each station in the order of their distance.
+     * It updates the distance to each neighboring station if a shorter path is found.
+     * </p>
+     *
+     * @param stations the list of StationDto objects, representing the graph
+     * @param start    the name of the start station
+     * @param end      the name of the end station
+     * @return the shortest path distance from the start station to the end station
+     * @throws NoSuchEntityException if either the start or end station is not found in the list
+     */
     public static Integer shortestPath(List<StationDto> stations,
                                        String start, String end) {
         StationDto startStation = findStationByName(stations, start);
@@ -40,6 +66,14 @@ public class DijkstraAlgorithm {
         return endStation.getDistance();
     }
 
+    /**
+     * Finds a station by its name.
+     *
+     * @param stations the list of stations
+     * @param city     the city name to search for
+     * @return the StationDto object representing the station
+     * @throws com.andersen.ticket_to_ride.exception.NoSuchEntityException if no station is found with the given city name
+     */
     private static StationDto findStationByName(List<StationDto> stations, String city) {
         Optional<StationDto> stationOptional = stations.stream()
                 .filter(x -> x.getStation().getCity().equals(city)).findFirst();

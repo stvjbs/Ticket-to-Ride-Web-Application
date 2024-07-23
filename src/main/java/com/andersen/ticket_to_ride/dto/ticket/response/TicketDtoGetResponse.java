@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+/**
+ * DTO class for the response of a ticket controller GET request.
+ */
 @AllArgsConstructor
 @Getter
 @Setter

@@ -5,6 +5,9 @@ import com.andersen.ticket_to_ride.exception.ValidationException;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * DTO class for creating a new ticket GET request.
+ */
 @Getter
 @Setter
 public class TicketFindRequest {
@@ -12,12 +15,26 @@ public class TicketFindRequest {
     private String arrival;
     private Currency currency;
 
+    /**
+     * Constructs a TicketFindRequest with the specified parameters.
+     *
+     * @param departure the departure station
+     * @param arrival   the arrival station
+     * @param currency  the currency as a string
+     */
     public TicketFindRequest(String departure, String arrival, String currency) {
         this.departure = departure;
         this.arrival = arrival;
         this.currency = validateAndMapCurrency(currency);
     }
 
+    /**
+     * Validates and maps the given currency string to the Currency enum.
+     *
+     * @param currency the currency as a string
+     * @return the corresponding Currency enum value
+     * @throws ValidationException if the currency is invalid
+     */
     private Currency validateAndMapCurrency(String currency) {
         if (currency == null) return Currency.GBP;
         try {
