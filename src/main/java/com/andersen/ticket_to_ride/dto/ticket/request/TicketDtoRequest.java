@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+/**
+ * DTO class for creating a new ticket POST request.
+ */
 @Data
 public class TicketDtoRequest {
     private String departure;

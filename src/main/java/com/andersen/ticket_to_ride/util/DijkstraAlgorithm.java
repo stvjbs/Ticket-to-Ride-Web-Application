@@ -13,11 +13,11 @@ import java.util.PriorityQueue;
  * <p>
  * This class provides methods to find the shortest path between two stations
  * in a graph represented by a list of StationDto objects.
- * The main method, {@link #shortestPath(List,String,String)}, implements Dijkstra's algorithm
+ * The main method, {@link #shortestPath(List, String, String)}, implements Dijkstra's algorithm
  * to find the shortest path.
  * </p>
  */
-public class DijkstraAlgorithm {
+public final class DijkstraAlgorithm {
 
     private DijkstraAlgorithm() {
         throw new IllegalStateException("Utility class");
@@ -35,10 +35,10 @@ public class DijkstraAlgorithm {
      * </p>
      *
      * @param stations the list of StationDto objects, representing the graph
-     * @param start the name of the start station
-     * @param end the name of the end station
+     * @param start    the name of the start station
+     * @param end      the name of the end station
      * @return the shortest path distance from the start station to the end station
-     * @throws com.andersen.ticket_to_ride.exception.NoSuchEntityException if either the start or end station is not found in the list
+     * @throws NoSuchEntityException if either the start or end station is not found in the list
      */
     public static Integer shortestPath(List<StationDto> stations,
                                        String start, String end) {
@@ -70,7 +70,7 @@ public class DijkstraAlgorithm {
      * Finds a station by its name.
      *
      * @param stations the list of stations
-     * @param city the city name to search for
+     * @param city     the city name to search for
      * @return the StationDto object representing the station
      * @throws com.andersen.ticket_to_ride.exception.NoSuchEntityException if no station is found with the given city name
      */

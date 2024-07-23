@@ -9,21 +9,31 @@ import java.math.BigDecimal;
  * The pricing structure is based on different rates for groups of segments.
  * </p>
  */
-public class PriceCounter {
+public final class PriceCounter {
 
-    /** The number of segments for the biggest discount price. */
+    /**
+     * The number of segments for the biggest discount price.
+     */
     private static final int A = 3;
 
-    /** The number of segments for the second discount price. */
+    /**
+     * The number of segments for the second discount price.
+     */
     private static final int B = 2;
 
-    /** The biggest discount price. */
+    /**
+     * The biggest discount price.
+     */
     private static final double PRICE_FOR_EVERY_A_SEGMENTS = 10.0;
 
-    /** The second discount price. */
+    /**
+     * The second discount price.
+     */
     private static final double PRICE_FOR_EVERY_B_SEGMENTS = 7.0;
 
-    /** The price for every single remaining segment. */
+    /**
+     * The price for every single remaining segment.
+     */
     private static final double PRICE_FOR_EVERY_SINGLE_SEGMENT = 5.0;
 
     private PriceCounter() {

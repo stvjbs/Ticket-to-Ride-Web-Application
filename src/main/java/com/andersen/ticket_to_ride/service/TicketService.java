@@ -15,12 +15,23 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+
 @Service
 @RequiredArgsConstructor
 public class TicketService {
     private final StationRouteService stationRouteService;
     private final TicketRepository ticketRepository;
 
+    /**
+     * Create @ticketFindRequest for validating data and performing to @stationRouteService.
+     *
+     * @param departure the departure station
+     * @param arrival   the arrival station
+     * @param currency  the currency
+     * @return the ticket DTO response
+     * @throws ValidationException                                         if currency is invalid
+     * @throws com.andersen.ticket_to_ride.exception.NoSuchEntityException if station not found.
+     */
     public TicketDtoGetResponse findTicket(String departure, String arrival, String currency) {
         TicketFindRequest ticketFindRequest = new TicketFindRequest(departure, arrival, currency);
         Integer segments = stationRouteService
@@ -30,6 +41,13 @@ public class TicketService {
         return new TicketDtoGetResponse(segments, price, ticketFindRequest.getCurrency());
     }
 
+    /**
+     * Saves a new ticket.
+     *
+     * @param request the ticket DTO request
+     * @return the ticket DTO positive or negative post response.
+     * @throws com.andersen.ticket_to_ride.exception.ValidationException if at least one field is null.
+     */
     public TicketDtoPostResponse saveTicket(TicketDtoRequest request) {
         BigDecimal travellerAmount = request.getTravellerAmount();
         BigDecimal price = request.getPrice();
