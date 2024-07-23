@@ -9,6 +9,6 @@ import lombok.Data;
  * for positive and negative cases at ticket controller.
  */
 @Data
-public class TicketDtoPostResponse {
+public class TicketPostResponse {
     private Currency currency;
 }

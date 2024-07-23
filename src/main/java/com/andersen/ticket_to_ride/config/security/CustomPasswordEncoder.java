@@ -23,7 +23,7 @@ public class CustomPasswordEncoder implements PasswordEncoder {
     /**
      * Verifies if the raw password matches the encoded password.
      *
-     * @param rawPassword the raw password to check
+     * @param rawPassword     the raw password to check
      * @param encodedPassword the encoded password to compare with
      * @return true if passwords match, false otherwise
      */
