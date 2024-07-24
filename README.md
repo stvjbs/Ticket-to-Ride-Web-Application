@@ -34,7 +34,7 @@ This Java-based web application allows you to find the shortest path between sta
 
 1. **Clone the Repository**
 
-   git clone https://github.com/stvjbs/Ticket-to-Ride-Web-Application/develop
+   git clone https://github.com/stvjbs/Ticket-to-Ride-Web-Application
 
 2. **Set Up PostgreSQL Database**
 
@@ -47,12 +47,16 @@ This Java-based web application allows you to find the shortest path between sta
       
          ``` docker run --name ticket-to-ride-db -p 5432:5432 -d ticket-to-ride-db ```
    
-   3. *Run SQL Script*
+   3. *Copy SQL scripts to the container and execute them:*
 
-         ``` docker cp src/main/resources/insert_stations_graph.sql ticket-to-ride-db:/insert_stations_graph.sql ```
+         ``` docker cp src/main/resources/sql/DDL.sql ticket-to-ride-db:/DDL.sql ```
         
-         ``` docker exec -it ticket-to-ride-db psql -U user -d Ticket_to_ride_app -f /insert_stations_graph.sql ```
+         ``` docker exec -it ticket-to-ride-db psql -U user -d Ticket_to_ride_app -f /DDL.sql ```
 
+         ``` docker cp src/main/resources/sql/DML.sql ticket-to-ride-db:/DML.sql ```
+
+         ``` docker exec -it ticket-to-ride-db psql -U user -d Ticket_to_ride_app -f /DML.sql ```
+   
 3.**Build and Run**
    Build the project and run it:
 

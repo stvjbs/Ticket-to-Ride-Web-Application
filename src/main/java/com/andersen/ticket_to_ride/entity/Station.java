@@ -19,7 +19,7 @@ import java.util.Set;
 public class Station {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "city", unique = true, nullable = false)
     private String city;
     @OneToMany(mappedBy = "start")

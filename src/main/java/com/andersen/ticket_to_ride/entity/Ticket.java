@@ -27,7 +27,7 @@ import java.math.BigDecimal;
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @JoinColumn(name = "departure_id", nullable = false)
     @ManyToOne
     private Station departure;
