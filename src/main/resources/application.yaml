@@ -1,3 +1,16 @@
 spring:
   application:
     name: Ticket-to-Ride-Web-Application
+    pathfinding:
+      algorithm: dijkstra
+    pricecounting:
+      type: default
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/Ticket_to_ride_app
+    username: user
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
