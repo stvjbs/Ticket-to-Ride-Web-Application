@@ -38,9 +38,11 @@ public class StationDtoMapper {
      */
     public static StationDto toDtoWithNeighbours(Station station) {
         StationDto stationDto = toDto(station);
-        stationDto.setNeighbours(station.getNeighbours().stream()
-                .map(StationDtoMapper::routeToDto)
-                .collect(Collectors.toSet()));
+        stationDto.setNeighbours(station.getNeighbours() != null ?
+                station.getNeighbours().stream()
+                        .map(StationDtoMapper::routeToDto)
+                        .collect(Collectors.toSet())
+                : null);
         return stationDto;
     }
 
