@@ -13,4 +13,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
+logging:
+  level:
+    root: INFO
+    com.andersen.ticket_to_ride.service: DEBUG
+    com.andersen.ticket_to_ride.aspect: DEBUG
