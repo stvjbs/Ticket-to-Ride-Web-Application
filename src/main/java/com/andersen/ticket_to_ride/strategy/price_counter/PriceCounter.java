@@ -1,5 +1,7 @@
 package com.andersen.ticket_to_ride.strategy.price_counter;
 
+import com.andersen.ticket_to_ride.exception.SegmentsNegativeException;
+
 import java.math.BigDecimal;
 
 /**
@@ -44,6 +46,9 @@ public final class PriceCounter implements PriceCountStrategy {
      */
     @Override
     public BigDecimal countPrice(Integer segments) {
+        if (segments < 0) {
+            throw new SegmentsNegativeException("Segments cannot be negative");
+        }
         int countGroupsOfA = segments / A;
         int remainingSegmentsAfterA = segments % A;
         int countGroupsOfB = remainingSegmentsAfterA / B;

@@ -49,11 +49,11 @@ This Java-based web application allows you to find the shortest path between sta
    
    3. *Copy SQL scripts to the container and execute them:*
 
-         ``` docker cp src/main/resources/DDL.sql ticket-to-ride-db:/DDL.sql ```
+         ``` docker cp src/main/resources/sql/DDL.sql ticket-to-ride-db:/DDL.sql ```
         
          ``` docker exec -it ticket-to-ride-db psql -U user -d Ticket_to_ride_app -f /DDL.sql ```
 
-         ``` docker cp src/main/resources/DML.sql ticket-to-ride-db:/DML.sql ```
+         ``` docker cp src/main/resources/sql/DML.sql ticket-to-ride-db:/DML.sql ```
 
          ``` docker exec -it ticket-to-ride-db psql -U user -d Ticket_to_ride_app -f /DML.sql ```
    
