@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Java-based web application allows you to find the shortest path between stations using Dijkstra’s algorithm and includes features for calculating ticket prices and managing tickets.
+This Java-based web application allows you to find the shortest path between stations and includes features for calculating ticket prices and managing tickets.
 
 ## Features
 
@@ -68,6 +68,10 @@ This Java-based web application allows you to find the shortest path between sta
 
 ## API Endpoints
 
+#### Default authentication credentials:
+- **User**: stevejobs
+- **Password**: stevejobs
+
 ### Find Shortest Path
 
 - **URL**: `ticket/findPath?departure={startStation}&arrival={endStation}&currency={currency}`
@@ -78,6 +82,7 @@ This Java-based web application allows you to find the shortest path between sta
    - `endStation`: Name of the destination station
    - `currency`: Your currency
 - **Description**: Finds the shortest path between two stations.
+- **Authentication**: Not compulsory.
 
 ### Manage Tickets
 
@@ -90,7 +95,8 @@ This Java-based web application allows you to find the shortest path between sta
    - `currency`: Currency type
    - `segments`: Number of segments in the route
    - `traveller`: Traveller details
-- **Description**: Saves a ticket and validates the price.
+- **Description**: Saves a ticket and validates the price. 
+- **Authentication**: Compulsory.
 
 ## Configuration
 

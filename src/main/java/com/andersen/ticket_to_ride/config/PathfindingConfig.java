@@ -17,7 +17,7 @@ public class PathfindingConfig {
      * @return a new instance of DijkstraAlgorithm.
      */
     @Bean
-    @ConditionalOnProperty(name = "spring.application.pathfinding.algorithm", havingValue = "dijkstra")
+    @ConditionalOnProperty(name = "spring.application.pathfinding.algorithm", havingValue = "dijkstra", matchIfMissing = true)
     public PathfindingStrategy dijkstraAlgorithm() {
         return new DijkstraAlgorithm();
     }

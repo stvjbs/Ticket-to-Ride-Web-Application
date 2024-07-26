@@ -4,6 +4,7 @@ package com.andersen.ticket_to_ride.strategy.pathfinder;
 import com.andersen.ticket_to_ride.dto.station_route.RouteDto;
 import com.andersen.ticket_to_ride.dto.station_route.StationDto;
 import com.andersen.ticket_to_ride.exception.NoSuchEntityException;
+import com.andersen.ticket_to_ride.exception.StationNotConnectedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -55,10 +56,12 @@ class DijkstraAlgorithmTest {
     }
 
     @Test
-    void findPath_NoPathAvailable_ReturnsMaxValue() {
+    void findPath_NoPathAvailable_ThrowsStationNotConnectedException() {
         StationDto isolatedStation = StationDto.builder().id(4L).city("StationD").neighbours(Set.of()).build();
         stations.add(isolatedStation);
-        int shortestPath = dijkstraAlgorithm.findPath(stations, "StationA", "StationD");
-        assertEquals(Integer.MAX_VALUE, shortestPath);
+        Exception exception = assertThrows(StationNotConnectedException.class,
+                () -> dijkstraAlgorithm.findPath(stations, "StationA", "StationD"));
+        assertEquals("Station: " + isolatedStation.getCity() +
+                " has no connection with StationA", exception.getMessage());
     }
 }

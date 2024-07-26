@@ -24,4 +24,4 @@ VALUES ((SELECT id FROM stations WHERE city = 'Bristol'), (SELECT id FROM statio
        ((SELECT id FROM stations WHERE city = 'Birmingham'), (SELECT id FROM stations WHERE city = 'Bristol'), 3),
        ((SELECT id FROM stations WHERE city = 'Birmingham'), (SELECT id FROM stations WHERE city = 'Swindon'), 4);
 INSERT INTO travellers (first_name, last_name, login, password, role)
-VALUES ('John', 'Doe', 'johndoe1', 'doejohn', 'user')
+VALUES ('Steve', 'Jobs', 'stevejobs', 'stevejobs', 'user')

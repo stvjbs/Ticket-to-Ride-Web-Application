@@ -5,7 +5,9 @@ import com.andersen.ticket_to_ride.dto.station_route.StationDto;
 import com.andersen.ticket_to_ride.entity.Route;
 import com.andersen.ticket_to_ride.entity.Station;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -36,13 +38,13 @@ public class StationDtoMapper {
      * @param station the Station entity.
      * @return the StationDto object with neighbours.
      */
-    public static StationDto toDtoWithNeighbours(Station station) {
+    private static StationDto toDtoWithNeighbours(Station station) {
         StationDto stationDto = toDto(station);
         stationDto.setNeighbours(station.getNeighbours() != null ?
                 station.getNeighbours().stream()
                         .map(StationDtoMapper::routeToDto)
                         .collect(Collectors.toSet())
-                : null);
+                : Set.of());
         return stationDto;
     }
 
@@ -53,9 +55,9 @@ public class StationDtoMapper {
      * @return a list of StationDto objects.
      */
     public static List<StationDto> toDto(List<Station> stations) {
-        return stations.stream()
-                .map(StationDtoMapper::toDtoWithNeighbours)
-                .toList();
+        List<StationDto> stationsDtoWithNeighbours = new ArrayList<>();
+        stations.forEach(x-> stationsDtoWithNeighbours.add(toDtoWithNeighbours(x)));
+        return stationsDtoWithNeighbours;
     }
 
     /**

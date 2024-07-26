@@ -3,6 +3,7 @@ package com.andersen.ticket_to_ride.strategy.pathfinder;
 import com.andersen.ticket_to_ride.dto.station_route.RouteDto;
 import com.andersen.ticket_to_ride.dto.station_route.StationDto;
 import com.andersen.ticket_to_ride.exception.NoSuchEntityException;
+import com.andersen.ticket_to_ride.exception.StationNotConnectedException;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,7 @@ public final class DijkstraAlgorithm implements PathfindingStrategy {
      * @param end      the name of the end station
      * @return the shortest path distance from the start station to the end station
      * @throws NoSuchEntityException if either the start or end station is not found in the list
+     * @throws StationNotConnectedException if the end station have no connections with the start station.
      */
     @Override
     public Integer findPath(List<StationDto> stations,
@@ -60,7 +62,12 @@ public final class DijkstraAlgorithm implements PathfindingStrategy {
             }
             currStation.setVisited(true);
         }
-        return endStation.getDistance();
+        Integer result = endStation.getDistance();
+        if (result == Integer.MAX_VALUE) {
+            throw new StationNotConnectedException("Station: " + endStation.getCity() +
+                    " has no connection with " + startStation.getCity());
+        }
+        return result;
     }
 
     /**

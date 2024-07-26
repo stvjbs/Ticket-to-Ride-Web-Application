@@ -7,101 +7,109 @@ import com.andersen.ticket_to_ride.entity.Station;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StationDtoMapperTest {
 
-    private Station station;
-    private Route route;
-    private StationDto stationDto;
+
+    private List<Station> stations;
+    private Station stationA;
+    private Route routeAB;
 
     @BeforeEach
     void setUp() {
-        station = new Station();
-        station.setId(1L);
-        station.setCity("CityA");
+        stationA = new Station();
+        stationA.setId(1L);
+        stationA.setCity("CityA");
 
-        Station neighbour = new Station();
-        neighbour.setId(2L);
-        neighbour.setCity("CityB");
+        Station stationB = new Station();
+        stationB.setId(2L);
+        stationB.setCity("CityB");
 
-        route = new Route();
-        route.setId(1L);
-        route.setStart(station);
-        route.setEnd(neighbour);
-        route.setLength(10);
+        Station stationC = new Station();
+        stationC.setId(3L);
+        stationC.setCity("CityC");
 
-        station.setNeighbours(Set.of(route));
+        routeAB = new Route();
+        routeAB.setId(1L);
+        routeAB.setStart(stationA);
+        routeAB.setEnd(stationB);
+        routeAB.setLength(5);
 
-        stationDto = StationDto.builder()
-                .id(1L)
-                .city("CityA")
-                .build();
+        Route routeBC = new Route();
+        routeBC.setId(2L);
+        routeBC.setStart(stationB);
+        routeBC.setEnd(stationC);
+        routeBC.setLength(7);
+
+        stationA.setNeighbours(Set.of(routeAB));
+        stationB.setNeighbours(Set.of(routeBC));
+        stationC.setNeighbours(Set.of());
+
+        stations = new ArrayList<>();
+        stations.add(stationA);
+        stations.add(stationB);
+        stations.add(stationC);
     }
-
-    // Positive test cases
 
     @Test
     void toDto_ValidStation_ReturnsStationDto() {
-        StationDto dto = StationDtoMapper.toDto(station);
-        assertNotNull(dto);
-        assertEquals(station.getId(), dto.getId());
-        assertEquals(station.getCity(), dto.getCity());
-    }
+        StationDto stationDto = StationDtoMapper.toDto(stationA);
 
-    @Test
-    void toDtoWithNeighbours_ValidStation_ReturnsStationDtoWithNeighbours() {
-        StationDto dto = StationDtoMapper.toDtoWithNeighbours(station);
-        assertNotNull(dto);
-        assertEquals(station.getId(), dto.getId());
-        assertEquals(station.getCity(), dto.getCity());
-        assertNotNull(dto.getNeighbours());
-        assertEquals(1, dto.getNeighbours().size());
-
-        RouteDto neighbourRouteDto = dto.getNeighbours().iterator().next();
-        assertEquals(route.getId(), neighbourRouteDto.getId());
-        assertEquals(route.getLength(), neighbourRouteDto.getLength());
-        assertEquals(route.getStart().getId(), neighbourRouteDto.getStart().getId());
-        assertEquals(route.getEnd().getId(), neighbourRouteDto.getEnd().getId());
+        assertNotNull(stationDto);
+        assertEquals(stationA.getId(), stationDto.getId());
+        assertEquals(stationA.getCity(), stationDto.getCity());
     }
 
     @Test
     void toDto_ListOfStations_ReturnsListOfStationDtos() {
-        List<Station> stations = List.of(station);
-        List<StationDto> dtos = StationDtoMapper.toDto(stations);
-        assertNotNull(dtos);
-        assertEquals(1, dtos.size());
+        List<StationDto> stationDtos = StationDtoMapper.toDto(stations);
 
-        StationDto dto = dtos.getFirst();
-        assertEquals(station.getId(), dto.getId());
-        assertEquals(station.getCity(), dto.getCity());
+        assertNotNull(stationDtos);
+        assertEquals(stations.size(), stationDtos.size());
+        for (int i = 0; i < stations.size(); i++) {
+            StationDto stationDto = stationDtos.get(i);
+            Station station = stations.get(i);
+            assertEquals(station.getId(), stationDto.getId());
+            assertEquals(station.getCity(), stationDto.getCity());
+            if (station.getNeighbours() != null && !station.getNeighbours().isEmpty()) {
+                assertNotNull(stationDto.getNeighbours());
+                assertFalse(stationDto.getNeighbours().isEmpty());
+            } else {
+                assertTrue(stationDto.getNeighbours().isEmpty());
+            }
+        }
     }
 
     @Test
     void routeToDto_ValidRoute_ReturnsRouteDto() {
-        RouteDto dto = StationDtoMapper.routeToDto(route);
-        assertNotNull(dto);
-        assertEquals(route.getId(), dto.getId());
-        assertEquals(route.getLength(), dto.getLength());
-        assertEquals(route.getStart().getId(), dto.getStart().getId());
-        assertEquals(route.getEnd().getId(), dto.getEnd().getId());
+        RouteDto routeDto = StationDtoMapper.routeToDto(routeAB);
+
+        assertNotNull(routeDto);
+        assertEquals(routeAB.getId(), routeDto.getId());
+        assertEquals(routeAB.getLength(), routeDto.getLength());
+        assertEquals(routeAB.getStart().getId(), routeDto.getStart().getId());
+        assertEquals(routeAB.getEnd().getId(), routeDto.getEnd().getId());
     }
 
     @Test
     void toEntity_ValidStationDto_ReturnsStation() {
-        Station entity = StationDtoMapper.toEntity(stationDto);
-        assertNotNull(entity);
-        assertEquals(stationDto.getId(), entity.getId());
-        assertEquals(stationDto.getCity(), entity.getCity());
-    }
+        StationDto stationDto = StationDto.builder()
+                .id(stationA.getId())
+                .city(stationA.getCity())
+                .build();
 
-    @Test
-    void toDtoWithNeighbours_NullStation_ThrowsException() {
-        assertThrows(NullPointerException.class, () -> StationDtoMapper.toDtoWithNeighbours(null));
+        Station station = StationDtoMapper.toEntity(stationDto);
+
+        assertNotNull(station);
+        assertEquals(stationDto.getId(), station.getId());
+        assertEquals(stationDto.getCity(), station.getCity());
     }
 }
