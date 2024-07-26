@@ -20,7 +20,7 @@ public class SecurityConfiguration {
      * @throws Exception if an error occurs during configuration
      */
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers("ticket/findPath").permitAll()
