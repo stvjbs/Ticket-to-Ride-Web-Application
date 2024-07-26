@@ -4,12 +4,12 @@ import com.andersen.ticket_to_ride.strategy.price_counter.PriceCountStrategy;
 import com.andersen.ticket_to_ride.strategy.price_counter.PriceCounter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Configuration class for price counting strategies.
  */
-@ControllerAdvice
+@Configuration
 public class PriceCountingConfig {
     /**
      * Bean definition for the default price counting strategy.
@@ -18,7 +18,7 @@ public class PriceCountingConfig {
      */
     @Bean
     @ConditionalOnProperty(name = "spring.application.pricecounting.type", havingValue = "default", matchIfMissing = true)
-    PriceCountStrategy priceCountStrategy() {
+    public PriceCountStrategy priceCountStrategy() {
         return new PriceCounter();
     }
 }
